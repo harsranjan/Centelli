@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "resources": [
+    {
+      "resource": "asset",
+      "metadata": {
+        "folderPath": {
+          "defaultValue": "ranjanharsh123456@outlook.com's workspace",
+          "isExpression": false
+        }
+      }
+    }
+  ]
+}

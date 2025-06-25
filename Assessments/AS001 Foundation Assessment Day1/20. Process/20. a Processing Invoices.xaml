@@ -1,0 +1,412 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Processing_Invoices" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="idictAssets" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="idictRateCodes" Type="InArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="ilstmailMessages" Type="InArgument(scg:List(snm:MailMessage))" />
+    <x:Property Name="idtInvoices" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="idtLogFiles" Type="InArgument(sd:DataTable)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Processing_Invoices_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.PDF.Activities</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>System.Collections.Specialized</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>System.Collections.Specialized</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Processing_Invoices" sap:VirtualizedContainerService.HintSize="764.0000000000001,6405.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <TryCatch DisplayName="If any exception occurs in sequence" sap:VirtualizedContainerService.HintSize="590.4,6382.4" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+      <TryCatch.Try>
+        <Sequence sap2010:Annotation.AnnotationText="1. Travsersing List of Mails&#xA;2. Checking where invoice is stored i.e., in Body of mail or Attachment&#xA;3. Saving Data to Invoices datatable as well as LogFiles DataTable" DisplayName="Sequence for processing invoices" sap:VirtualizedContainerService.HintSize="588.8,5902.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" DisplayName="For Each currentMail in List of Mails" sap:VirtualizedContainerService.HintSize="555.2,5782.4" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[ilstmailMessages]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="snm:MailMessage">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="currentMail" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Action to perform in each Mail" sap:VirtualizedContainerService.HintSize="553.6,5660.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:LogMessage DisplayName="Log Message - Mail Retiving Started" sap:VirtualizedContainerService.HintSize="520,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started working on mail received from : &quot;+currentMail.From.DisplayName]" />
+                  <If Condition="[currentMail.Attachments.Count &gt; 0]" DisplayName="If invoice is stored in attachment or body of that mail" sap:VirtualizedContainerService.HintSize="520,5287.2" sap2010:WorkflowViewState.IdRef="If_1">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence DisplayName="IF attachment found in mail" sap:VirtualizedContainerService.HintSize="518.4,2468" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:LogMessage DisplayName="Log where invoice is found" sap:VirtualizedContainerService.HintSize="484.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[&quot;Invoice Found as Attachment.&quot;]" />
+                        <ui:SaveMailAttachments Attachments="{x:Null}" ResourceAttachments="{x:Null}" DisplayName="Path To Save Attachments" ExcludeInlineAttachments="False" Filter=".pdf" FolderPath="[idictAssets(&quot;ASS01 - Path To Store Attachments&quot;).ToString]" sap:VirtualizedContainerService.HintSize="484.8,226.4" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_1" Message="[currentMail]" OverwriteExisting="True" />
+                        <ui:ForEachFileX DisplayName="For Each Invoice in Folder where all attachments are stored" Filter="*.pdf" Folder="[idictAssets(&quot;ASS01 - Path To Store Attachments&quot;).ToString]" sap:VirtualizedContainerService.HintSize="484.8,2007.2" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
+                          <ui:ForEachFileX.Body>
+                            <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
+                              <ActivityAction.Argument1>
+                                <DelegateInArgument x:TypeArguments="si:FileInfo" Name="CurrentInvoice" />
+                              </ActivityAction.Argument1>
+                              <ActivityAction.Argument2>
+                                <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
+                              </ActivityAction.Argument2>
+                              <Sequence DisplayName="Action performed on each Invoice file" sap:VirtualizedContainerService.HintSize="451.2,1719.2" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                                <Sequence.Variables>
+                                  <Variable x:TypeArguments="x:String" Name="strPdfText" />
+                                  <Variable x:TypeArguments="x:String" Name="strPropertyName" />
+                                  <Variable x:TypeArguments="x:String" Name="strGuestFirstName" />
+                                  <Variable x:TypeArguments="x:String" Name="strGuestLastName" />
+                                  <Variable x:TypeArguments="x:String" Name="strArrivalDate" />
+                                  <Variable x:TypeArguments="x:String" Name="strDeptDate" />
+                                  <Variable x:TypeArguments="x:String" Name="strBookingRef" />
+                                  <Variable x:TypeArguments="x:String" Name="strRoomRate" />
+                                  <Variable x:TypeArguments="x:String" Name="strRoomType" />
+                                  <Variable x:TypeArguments="x:Boolean" Name="boolStatus" />
+                                </Sequence.Variables>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:ReadPDFText DisplayName="Read PDF Text from each invoice" FileName="[CurrentInvoice.FullName]" sap:VirtualizedContainerService.HintSize="417.6,115.2" sap2010:WorkflowViewState.IdRef="ReadPDFText_2" PreserveFormatting="True" Range="All" Text="[strPdfText]" />
+                                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="20. b Extract Data Using Text - Invoke Workflow File (20. Process\20. b Extract Data Using Text.xaml)" sap:VirtualizedContainerService.HintSize="417.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="20. Process\20. b Data Extraction.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:String" x:Key="istrTextData">[strPdfText]</InArgument>
+                                    <OutArgument x:TypeArguments="x:String" x:Key="ostrPropertyName">[strPropertyName]</OutArgument>
+                                    <OutArgument x:TypeArguments="x:String" x:Key="ostrGuestFirstName">[strGuestFirstName]</OutArgument>
+                                    <OutArgument x:TypeArguments="x:String" x:Key="ostrGuestLastName">[strGuestLastName]</OutArgument>
+                                    <OutArgument x:TypeArguments="x:String" x:Key="ostrArrivalDate">[strArrivalDate]</OutArgument>
+                                    <OutArgument x:TypeArguments="x:String" x:Key="ostrDeptDate">[strDeptDate]</OutArgument>
+                                    <OutArgument x:TypeArguments="x:String" x:Key="ostrBookingRef">[strBookingRef]</OutArgument>
+                                    <OutArgument x:TypeArguments="x:String" x:Key="ostrRoomRate">[strRoomRate]</OutArgument>
+                                    <OutArgument x:TypeArguments="x:String" x:Key="ostrRoomType">[strRoomType]</OutArgument>
+                                    <OutArgument x:TypeArguments="x:Boolean" x:Key="oboolStatus">[boolStatus]</OutArgument>
+                                    <InArgument x:TypeArguments="x:String" x:Key="istrFileName">[CurrentInvoice.FullName]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{currentMail.From.Address, strGuestFirstName + &quot; &quot; + strGuestLastName, strPropertyName, strArrivalDate, strDeptDate, strBookingRef, strRoomRate, strRoomType, If(currentMail.Subject.ToLower().Contains(&quot;confirmation&quot;), &quot;Confirmation&quot;, &quot;Cancellation&quot;), If(currentMail.Subject.ToLower().Contains(&quot;makemytrip&quot;), &quot;MakeMyTrip&quot;, &quot;Agoda&quot;),currentMail.Headers(&quot;Message-ID&quot;).ToString,idictRateCodes(strRoomType).ToString}]" DataTable="[idtInvoices]" DisplayName="Add Data Row - In Invoices Table" sap:VirtualizedContainerService.HintSize="417.6,220" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{currentMail.From.Address, strGuestFirstName + &quot; &quot; + strGuestLastName, strPropertyName, strArrivalDate, strDeptDate, strBookingRef, strRoomRate, strRoomType, If(currentMail.Subject.ToLower().Contains(&quot;confirmation&quot;), &quot;Confirmation&quot;, &quot;Cancellation&quot;), If(currentMail.Subject.ToLower().Contains(&quot;makemytrip&quot;), &quot;MakeMyTrip&quot;, &quot;Agoda&quot;), currentMail.Headers(&quot;Message-ID&quot;).ToString(),idictRateCodes(strRoomType).ToString, DateTime.Now.ToString(), If(boolStatus, &quot;Success&quot;, &quot;Failed&quot;)}]" DataTable="[idtLogFiles]" DisplayName="Add Data Row - In LogFiles Table" sap:VirtualizedContainerService.HintSize="417.6,220" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+                                <If Condition="[System.IO.File.Exists(idictAssets(&quot;ASS01 - Excel Path to store Invoice Data&quot;).ToString)]" DisplayName="Checking if Excel File Exists" sap:VirtualizedContainerService.HintSize="417.6,536.8" sap2010:WorkflowViewState.IdRef="If_2">
+                                  <If.Then>
+                                    <Sequence DisplayName="If Excel already exists" sap:VirtualizedContainerService.HintSize="416,199.2" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:AppendRange WorkbookPathResource="{x:Null}" DataTable="[idtLogFiles]" DisplayName="Just add datarow to Excel" sap:VirtualizedContainerService.HintSize="382.4,139.2" sap2010:WorkflowViewState.IdRef="AppendRange_1" SheetName="[idictAssets(&quot;ASS01 - Excel To Store LOG Sheet Name&quot;).ToString]" WorkbookPath="[idictAssets(&quot;ASS01 - Excel To Store LOG Path&quot;).ToString]" />
+                                    </Sequence>
+                                  </If.Then>
+                                  <If.Else>
+                                    <Sequence DisplayName="If no Excel Exists" sap:VirtualizedContainerService.HintSize="416,199.2" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[idtLogFiles]" DisplayName="Writing If not Existing Excel File is Present" sap:VirtualizedContainerService.HintSize="382.4,139.2" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="[idictAssets(&quot;ASS01 - Excel To Store LOG Sheet Name&quot;).ToString]" WorkbookPath="[idictAssets(&quot;ASS01 - Excel To Store LOG Path&quot;).ToString]" />
+                                    </Sequence>
+                                  </If.Else>
+                                </If>
+                                <ui:LogMessage DisplayName="Log Message - Data Added to Excel" sap:VirtualizedContainerService.HintSize="417.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Extracted Data added to Excel&quot;]" />
+                                <ui:ClearDataTable DataTable="[idtLogFiles]" DisplayName="Clear DT - For Unique Data" sap:VirtualizedContainerService.HintSize="417.6,112.8" sap2010:WorkflowViewState.IdRef="ClearDataTable_1" />
+                                <ui:DeleteFileX DisplayName="Delete File - To Stop Redundancy" sap:VirtualizedContainerService.HintSize="417.6,104" sap2010:WorkflowViewState.IdRef="DeleteFileX_1" Path="[CurrentInvoice.FullName]" />
+                              </Sequence>
+                            </ActivityAction>
+                          </ui:ForEachFileX.Body>
+                        </ui:ForEachFileX>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence DisplayName="Else - if attachment not found means invoice is in mail body" sap:VirtualizedContainerService.HintSize="518.4,2680.8" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                        <Sequence.Variables>
+                          <Variable x:TypeArguments="x:String" Name="strMailBodyText" />
+                          <Variable x:TypeArguments="x:Boolean" Name="boolStatus" />
+                          <Variable x:TypeArguments="x:String" Name="strGuestFirstName" />
+                          <Variable x:TypeArguments="x:String" Name="strGuestLastName" />
+                          <Variable x:TypeArguments="x:String" Name="strPropertyName" />
+                          <Variable x:TypeArguments="x:String" Name="strArrivalDate" />
+                          <Variable x:TypeArguments="x:String" Name="strDeptDate" />
+                          <Variable x:TypeArguments="x:String" Name="strBookingRef" />
+                          <Variable x:TypeArguments="x:String" Name="strRoomRate" />
+                          <Variable x:TypeArguments="x:String" Name="strRoomType" />
+                        </Sequence.Variables>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:LogMessage DisplayName="Log Message - Invoice Found in Body" sap:VirtualizedContainerService.HintSize="484.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Trace" Message="[&quot;Invoice Found in Body of Mail&quot;]" />
+                        <Assign DisplayName="Assign - Extracting Text from Mail Body" sap:VirtualizedContainerService.HintSize="484.8,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:String">[strMailBodyText]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:String">[currentMail.Body]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <Assign DisplayName="Assign - Status of Data Extraction" sap:VirtualizedContainerService.HintSize="484.8,113.6" sap2010:WorkflowViewState.IdRef="Assign_2">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Boolean">[boolStatus]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <TryCatch DisplayName="If any exception occurs while fetching data from PDF" sap:VirtualizedContainerService.HintSize="484.8,676" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                          <TryCatch.Try>
+                            <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim Data As System.Text.RegularExpressions.Match&#xA;&#xA;'Guest First Name&#xA;Dim guestFirstNameRegex As New System.Text.RegularExpressions.Regex(&quot;Guest:\s*\w*,\s*(?'firstname'\w*)&quot;)&#xA;Data = guestFirstNameRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrGuestFirstName = Data.Groups(&quot;firstname&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No First name found&quot;)&#xA;End If&#xA;&#xA;'Guest Last Name&#xA;Dim guestLastNameRegex As New System.Text.RegularExpressions.Regex(&quot;Guest:\s*(?'lastname'\w*)&quot;)&#xA;Data = guestLastNameRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrGuestLastName = Data.Groups(&quot;lastname&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Last name found&quot;)&#xA;End If&#xA;&#xA;'Property Name&#xA;Dim propertyNameRegex As New System.Text.RegularExpressions.Regex(&quot;(?'propname'.*)\s*\n*.*\s*\n*COPY OF INVOICE&quot;)&#xA;Data = propertyNameRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrPropertyName = Data.Groups(&quot;propname&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Property name found&quot;)&#xA;End If&#xA;&#xA;'Arrival Date&#xA;Dim arrDateRegex As New System.Text.RegularExpressions.Regex(&quot;Cashier No.\s*\n*.*\s*\n*.*\s*\n*(?'arrdate'.*)&quot;)&#xA;Data = arrDateRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrArrivalDate = Data.Groups(&quot;arrdate&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Arrival Date found&quot;)&#xA;End If&#xA;&#xA;'Departure Date&#xA;Dim deptDateRegex As New System.Text.RegularExpressions.Regex(&quot;Cashier No.\s*\n*.*\s*\n*.*\s*\n*.*\s*\n*(?'deptdate'.*)&quot;)&#xA;Data = deptDateRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrDeptDate = Data.Groups(&quot;deptdate&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Departure Date found&quot;)&#xA;End If&#xA;&#xA;'Booking Reference No.&#xA;Dim brefRegex As New System.Text.RegularExpressions.Regex(&quot;1\s*of\s*1\s*\n*(?'bref'\d*)&quot;)&#xA;Data = brefRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrBookingRef = Data.Groups(&quot;bref&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Booking Reference No. found&quot;)&#xA;End If&#xA;&#xA;'ostrRoomRate&#xA;Dim roomRateRegex As New System.Text.RegularExpressions.Regex(&quot;Transaction Amount\s*\n*(?'roomrate'.*)&quot;)&#xA;Data = roomRateRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrRoomRate = Data.Groups(&quot;roomrate&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Room Rate found&quot;)&#xA;End If&#xA;&#xA;'ostrRoomType&#xA;Dim roomTypeRegex As New System.Text.RegularExpressions.Regex(&quot;Cashier No.\s*\n*.*\s*\n*(?'roomtype'.*)&quot;)&#xA;Data = roomTypeRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrRoomType = Data.Groups(&quot;roomtype&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Room Type found&quot;)&#xA;End If&#xA;&#xA;" DisplayName="Invoke Code for Data Extraction" sap:VirtualizedContainerService.HintSize="416,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_2">
+                              <ui:InvokeCode.Arguments>
+                                <InArgument x:TypeArguments="x:String" x:Key="istrTextData">
+                                  <VisualBasicValue x:TypeArguments="x:String" ExpressionText="strMailBodyText" />
+                                </InArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="ostrGuestFirstName">
+                                  <VisualBasicReference x:TypeArguments="x:String" ExpressionText="strGuestFirstName" />
+                                </OutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="ostrGuestLastName">
+                                  <VisualBasicReference x:TypeArguments="x:String" ExpressionText="strGuestLastName" />
+                                </OutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="ostrPropertyName">
+                                  <VisualBasicReference x:TypeArguments="x:String" ExpressionText="strPropertyName" />
+                                </OutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="ostrArrivalDate">
+                                  <VisualBasicReference x:TypeArguments="x:String" ExpressionText="strArrivalDate" />
+                                </OutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="ostrDeptDate">
+                                  <VisualBasicReference x:TypeArguments="x:String" ExpressionText="strDeptDate" />
+                                </OutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="ostrBookingRef">
+                                  <VisualBasicReference x:TypeArguments="x:String" ExpressionText="strBookingRef" />
+                                </OutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="ostrRoomRate">
+                                  <VisualBasicReference x:TypeArguments="x:String" ExpressionText="strRoomRate" />
+                                </OutArgument>
+                                <OutArgument x:TypeArguments="x:String" x:Key="ostrRoomType">
+                                  <VisualBasicReference x:TypeArguments="x:String" ExpressionText="strRoomType" />
+                                </OutArgument>
+                              </ui:InvokeCode.Arguments>
+                            </ui:InvokeCode>
+                          </TryCatch.Try>
+                          <TryCatch.Catches>
+                            <Catch x:TypeArguments="ui:BusinessRuleException" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                              <ActivityAction x:TypeArguments="ui:BusinessRuleException">
+                                <ActivityAction.Argument>
+                                  <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
+                                </ActivityAction.Argument>
+                                <Sequence DisplayName="Action if exception occurs" sap:VirtualizedContainerService.HintSize="416,225.6" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:LogMessage DisplayName="Logging exception if occurs" sap:VirtualizedContainerService.HintSize="382.4,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Error" Message="[New Exception().Message +&quot; exception occured while fetching data from pdf&quot;]" />
+                                </Sequence>
+                              </ActivityAction>
+                            </Catch>
+                          </TryCatch.Catches>
+                          <TryCatch.Finally>
+                            <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </Sequence>
+                          </TryCatch.Finally>
+                        </TryCatch>
+                        <ui:LogMessage DisplayName="Log Message - Extracted Data" sap:VirtualizedContainerService.HintSize="484.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Data extraction from invoice completed.&quot;+vbCrLf+&quot;Guest Name : &quot;+strGuestFirstName+&quot; &quot;+strGuestLastName+vbCrLf+&quot;Property Name: &quot;+strPropertyName+vbCrLf+&quot;Arrival Date : &quot;+strArrivalDate+vbCrLf+&quot;Departure Date : &quot;+strDeptDate+vbCrLf+&quot;Booking Reference : &quot;+strBookingRef+vbCrLf+&quot;Room Rate : &quot;+strRoomRate+vbCrLf+&quot;Room Type : &quot;+strRoomType]" />
+                        <Assign DisplayName="Assign - Updating the Status of Data Extarction" sap:VirtualizedContainerService.HintSize="484.8,113.6" sap2010:WorkflowViewState.IdRef="Assign_3">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Boolean">[boolStatus]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{currentMail.From.Address, strGuestFirstName + &quot; &quot; + strGuestLastName, strPropertyName, strArrivalDate, strDeptDate, strBookingRef, strRoomRate, strRoomType, If(currentMail.Subject.ToLower().Contains(&quot;confirmation&quot;), &quot;Confirmation&quot;, &quot;Cancellation&quot;), If(currentMail.Subject.ToLower().Contains(&quot;makemytrip&quot;), &quot;MakeMyTrip&quot;, &quot;Agoda&quot;),currentMail.Headers(&quot;Message-ID&quot;).ToString(),idictRateCodes(strRoomType).ToString}]" DataTable="[idtInvoices]" DisplayName="Add Data Row - In Invoices Table" sap:VirtualizedContainerService.HintSize="484.8,220" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
+                        <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{currentMail.From.Address, strGuestFirstName + &quot; &quot; + strGuestLastName, strPropertyName, strArrivalDate, strDeptDate, strBookingRef, strRoomRate, strRoomType, If(currentMail.Subject.ToLower().Contains(&quot;confirmation&quot;), &quot;Confirmation&quot;, &quot;Cancellation&quot;), If(currentMail.Subject.ToLower().Contains(&quot;makemytrip&quot;), &quot;MakeMyTrip&quot;, &quot;Agoda&quot;),currentMail.Headers(&quot;Message-ID&quot;).ToString(),idictRateCodes(strRoomType).ToString, DateTime.Now.ToString(), If(boolStatus, &quot;Success&quot;, &quot;Failed&quot;)}]" DataTable="[idtLogFiles]" DisplayName="Add Data Row - In LogFiles Table" sap:VirtualizedContainerService.HintSize="484.8,220" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
+                        <If Condition="[System.IO.File.Exists(idictAssets(&quot;ASS01 - Excel Path to store Invoice Data&quot;).ToString)]" DisplayName="Checking if Excel File Exists" sap:VirtualizedContainerService.HintSize="484.8,536.8" sap2010:WorkflowViewState.IdRef="If_3">
+                          <If.Then>
+                            <Sequence DisplayName="If Excel already exists" sap:VirtualizedContainerService.HintSize="416,199.2" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:AppendRange WorkbookPathResource="{x:Null}" DataTable="[idtLogFiles]" DisplayName="Just add datarow to Excel" sap:VirtualizedContainerService.HintSize="382.4,139.2" sap2010:WorkflowViewState.IdRef="AppendRange_2" SheetName="[idictAssets(&quot;ASS01 - Excel To Store LOG Sheet Name&quot;).ToString]" WorkbookPath="[idictAssets(&quot;ASS01 - Excel To Store LOG Path&quot;).ToString]" />
+                            </Sequence>
+                          </If.Then>
+                          <If.Else>
+                            <Sequence DisplayName="if no excel file is present" sap:VirtualizedContainerService.HintSize="416,199.2" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[idtLogFiles]" DisplayName="Writing If not Existing Excel File is Present" sap:VirtualizedContainerService.HintSize="382.4,139.2" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="[idictAssets(&quot;ASS01 - Excel To Store LOG Sheet Name&quot;).ToString]" WorkbookPath="[idictAssets(&quot;ASS01 - Excel To Store LOG Path&quot;).ToString]" />
+                            </Sequence>
+                          </If.Else>
+                        </If>
+                        <ui:LogMessage DisplayName="Log Message - Data Added to Excel" sap:VirtualizedContainerService.HintSize="484.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;Extracted Data added to Excel&quot;]" />
+                        <ui:ClearDataTable DataTable="[idtLogFiles]" DisplayName="Clear DT - For Unique Data" sap:VirtualizedContainerService.HintSize="484.8,104" sap2010:WorkflowViewState.IdRef="ClearDataTable_2" />
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[idtInvoices]" DisplayName="Writing Invoices Details Excel" sap:VirtualizedContainerService.HintSize="520,139.2" sap2010:WorkflowViewState.IdRef="WriteRange_4" SheetName="[idictAssets(&quot;ASS01 - Excel Sheet Name to Store Invoice Data&quot;).ToString]" WorkbookPath="[idictAssets(&quot;ASS01 - Excel Path to store Invoice Data&quot;).ToString]" />
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+          </ui:ForEach>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Action to perform if any exception occurs" sap:VirtualizedContainerService.HintSize="588.8,225.6" sap2010:WorkflowViewState.IdRef="Sequence_16">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Print exception message" sap:VirtualizedContainerService.HintSize="555.2,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_10" Message="[exception.Message +&quot; exception occured.&quot;]" />
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+      <TryCatch.Finally>
+        <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="588.8,89.6" sap2010:WorkflowViewState.IdRef="Sequence_15">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </TryCatch.Finally>
+    </TryCatch>
+  </Sequence>
+</Activity>

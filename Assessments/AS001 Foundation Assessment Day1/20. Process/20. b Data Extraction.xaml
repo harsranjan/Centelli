@@ -1,0 +1,276 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="_20__b_Extract_Data_Using_Text" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="istrTextData" Type="InArgument(x:String)" />
+    <x:Property Name="ostrPropertyName" Type="OutArgument(x:String)" />
+    <x:Property Name="ostrGuestFirstName" Type="OutArgument(x:String)" />
+    <x:Property Name="ostrGuestLastName" Type="OutArgument(x:String)" />
+    <x:Property Name="ostrArrivalDate" Type="OutArgument(x:String)" />
+    <x:Property Name="ostrDeptDate" Type="OutArgument(x:String)" />
+    <x:Property Name="ostrBookingRef" Type="OutArgument(x:String)" />
+    <x:Property Name="ostrRoomRate" Type="OutArgument(x:String)" />
+    <x:Property Name="ostrRoomType" Type="OutArgument(x:String)" />
+    <x:Property Name="oboolStatus" Type="OutArgument(x:Boolean)" />
+    <x:Property Name="istrFileName" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>_20__b_Extract_Data_Using_Text_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="_20__b_Extract_Data_Using_Text" sap:VirtualizedContainerService.HintSize="764.0000000000001,2855.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence sap2010:Annotation.AnnotationText="1. Data Extraction if Invoice is from MakeMyTrip&#xA;2. Data Extraction if invoice is from Agoda" DisplayName="Sequence for Data Extraction from Invoices" sap:VirtualizedContainerService.HintSize="502.4,2832" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If Condition="[istrFileName.ToLower.Contains(&quot;mmt&quot;)]" DisplayName="If Invoice name contains &quot;mmt&quot; Means MakeMytrip" sap:VirtualizedContainerService.HintSize="468.8,1356.8" sap2010:WorkflowViewState.IdRef="If_1">
+        <If.Then>
+          <Sequence DisplayName="Action to peform if subject contains makemytrip" sap:VirtualizedContainerService.HintSize="467.2,1128.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign DisplayName="Assign - Status of Data Extraction" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Boolean">[oboolStatus]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+              </Assign.Value>
+            </Assign>
+            <TryCatch DisplayName="if any exception occur while fetching data from pdf" sap:VirtualizedContainerService.HintSize="433.6,676" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+              <TryCatch.Try>
+                <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim Data As System.Text.RegularExpressions.Match&#xA;&#xA;'Guest First Name&#xA;Dim guestFirstNameRegex As New System.Text.RegularExpressions.Regex(&quot;Guest:\s*\w*,\s*(?'firstname'\w*)&quot;)&#xA;Data = guestFirstNameRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrGuestFirstName = Data.Groups(&quot;firstname&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No First name found&quot;)&#xA;End If&#xA;&#xA;'Guest Last Name&#xA;Dim guestLastNameRegex As New System.Text.RegularExpressions.Regex(&quot;Guest:\s*(?'lastname'\w*)&quot;)&#xA;Data = guestLastNameRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrGuestLastName = Data.Groups(&quot;lastname&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Last name found&quot;)&#xA;End If&#xA;&#xA;'Property Name&#xA;Dim propertyNameRegex As New System.Text.RegularExpressions.Regex(&quot;.(?'propname'\w*\s*\w*,\s*\d{2})&quot;)&#xA;Data = propertyNameRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrPropertyName = Data.Groups(&quot;propname&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Property name found&quot;)&#xA;End If&#xA;&#xA;'Arrival Date&#xA;Dim arrDateRegex As New System.Text.RegularExpressions.Regex(&quot;Arrival\s*(?'arrdate'.*)&quot;)&#xA;Data = arrDateRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrArrivalDate = Data.Groups(&quot;arrdate&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Arrival Date found&quot;)&#xA;End If&#xA;&#xA;'Departure Date&#xA;Dim deptDateRegex As New System.Text.RegularExpressions.Regex(&quot;Departure\s*(?'deptdate'.*)&quot;)&#xA;Data = deptDateRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrDeptDate = Data.Groups(&quot;deptdate&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Departure Date found&quot;)&#xA;End If&#xA;&#xA;'Booking Reference No.&#xA;Dim brefRegex As New System.Text.RegularExpressions.Regex(&quot;Reference\s*(?'bref'\d*)&quot;)&#xA;Data = brefRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrBookingRef = Data.Groups(&quot;bref&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Booking Reference No. found&quot;)&#xA;End If&#xA;&#xA;'ostrRoomRate&#xA;Dim roomRateRegex As New System.Text.RegularExpressions.Regex(&quot;Transaction Amount\s*(?'roomrate'.*)&quot;)&#xA;Data = roomRateRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrRoomRate = Data.Groups(&quot;roomrate&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Room Rate found&quot;)&#xA;End If&#xA;&#xA;'ostrRoomType&#xA;Dim roomTypeRegex As New System.Text.RegularExpressions.Regex(&quot;Room type\s*(?'roomtype'.*)&quot;)&#xA;Data = roomTypeRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrRoomType = Data.Groups(&quot;roomtype&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Room Type found&quot;)&#xA;End If&#xA;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="416,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_4">
+                  <ui:InvokeCode.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="istrTextData">[istrTextData]</InArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrGuestFirstName">[ostrGuestFirstName]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrGuestLastName">[ostrGuestLastName]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrPropertyName">[ostrPropertyName]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrArrivalDate">[ostrArrivalDate]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrDeptDate">[ostrDeptDate]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrBookingRef">[ostrBookingRef]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrRoomRate">[ostrRoomRate]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrRoomType">[ostrRoomType]</OutArgument>
+                  </ui:InvokeCode.Arguments>
+                </ui:InvokeCode>
+              </TryCatch.Try>
+              <TryCatch.Catches>
+                <Catch x:TypeArguments="ui:BusinessRuleException" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                  <ActivityAction x:TypeArguments="ui:BusinessRuleException">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Action if exception occurs" sap:VirtualizedContainerService.HintSize="416,225.6" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:LogMessage DisplayName="Logging if any exception occurs" sap:VirtualizedContainerService.HintSize="382.4,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Error" Message="[New Exception().Message + &quot; While fetching data from pdf&quot;]" />
+                    </Sequence>
+                  </ActivityAction>
+                </Catch>
+              </TryCatch.Catches>
+              <TryCatch.Finally>
+                <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Sequence>
+              </TryCatch.Finally>
+            </TryCatch>
+            <ui:LogMessage DisplayName="Log Message - Extracted Data" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Data extraction from invoice completed.&quot;+vbCrLf+&quot;Guest Name : &quot;+ostrGuestFirstName+&quot; &quot;+ostrGuestLastName+vbCrLf+&quot;Property Name: &quot;+ostrPropertyName+vbCrLf+&quot;Arrival Date : &quot;+ostrArrivalDate+vbCrLf+&quot;Departure Date : &quot;+ostrDeptDate+vbCrLf+&quot;Booking Reference : &quot;+ostrBookingRef+vbCrLf+&quot;Room Rate : &quot;+ostrRoomRate+vbCrLf+&quot;Room Type : &quot;+ostrRoomType]" />
+            <Assign DisplayName="Assign - Updating the Status of Data Extarction" sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_4">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Boolean">[oboolStatus]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="467.2,89.6" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Sequence>
+        </If.Else>
+      </If>
+      <If Condition="[istrFileName.ToLower.Contains(&quot;ag&quot;)]" DisplayName="If Subject of mail contains &quot;venue&quot; Then its Agoda" sap:VirtualizedContainerService.HintSize="468.8,1348" sap2010:WorkflowViewState.IdRef="If_2">
+        <If.Then>
+          <Sequence DisplayName="Action to peform if subject contains ag" sap:VirtualizedContainerService.HintSize="467.2,1128.8" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign DisplayName="Assign - Status of Data Extraction" sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_5">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Boolean">[oboolStatus]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+              </Assign.Value>
+            </Assign>
+            <TryCatch DisplayName="If any exception occurs while fetching data from PDF" sap:VirtualizedContainerService.HintSize="433.6,676" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+              <TryCatch.Try>
+                <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim Data As System.Text.RegularExpressions.Match&#xA;&#xA;'Guest First Name&#xA;Dim guestFirstNameRegex As New System.Text.RegularExpressions.Regex(&quot;1\s*(?'guestname'.*)(?=Non Smoking)&quot;)&#xA;Data = guestFirstNameRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrGuestFirstName = Data.Groups(&quot;guestname&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Name found&quot;)&#xA;End If&#xA;&#xA;'Guest Last Name&#xA;ostrGuestLastName =&quot;&quot;&#xA;&#xA;'Property Name&#xA;Dim propertyNameRegex As New System.Text.RegularExpressions.Regex(&quot;Venue:\s*(?'propname'.*)&quot;)&#xA;Data = propertyNameRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrPropertyName = Data.Groups(&quot;propname&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Property name found&quot;)&#xA;End If&#xA;&#xA;'Arrival Date&#xA;Dim arrDateRegex As New System.Text.RegularExpressions.Regex(&quot;Arrival:\s*(?'arrdate'.*)(?=No)&quot;)&#xA;Data = arrDateRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrArrivalDate = Data.Groups(&quot;arrdate&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Arrival Date found&quot;)&#xA;End If&#xA;&#xA;'Departure Date&#xA;Dim deptDateRegex As New System.Text.RegularExpressions.Regex(&quot;Departure:\s*(?'deptdate'.*)&quot;)&#xA;Data = deptDateRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrDeptDate = Data.Groups(&quot;deptdate&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Departure Date found&quot;)&#xA;End If&#xA;&#xA;'Booking Reference No.&#xA;Dim brefRegex As New System.Text.RegularExpressions.Regex(&quot;Non Smoking\s*(?'bref'\w*)&quot;)&#xA;Data = brefRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrBookingRef = Data.Groups(&quot;bref&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Booking Reference No. found&quot;)&#xA;End If&#xA;&#xA;'ostrRoomRate&#xA;Dim roomRateRegex As New System.Text.RegularExpressions.Regex(&quot;Rate:(?'roomrate'.*)&quot;)&#xA;Data = roomRateRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrRoomRate = Data.Groups(&quot;roomrate&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Room Rate found&quot;)&#xA;End If&#xA;&#xA;'ostrRoomType&#xA;Dim roomTypeRegex As New System.Text.RegularExpressions.Regex(&quot;Room\(s\):\s*(?'roomtype'\w*\s?\w*\s?\w*)&quot;)&#xA;Data = roomTypeRegex.Match(istrTextData)&#xA;If Data.Success Then&#xA;&#x9;ostrRoomType = Data.Groups(&quot;roomtype&quot;).ToString.Trim&#xA;Else&#xA;&#x9;console.WriteLine(&quot;No Room Type found&quot;)&#xA;End If&#xA;&#xA;" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="416,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_5">
+                  <ui:InvokeCode.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="istrTextData">[istrTextData]</InArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrGuestFirstName">[ostrGuestFirstName]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrGuestLastName">[ostrGuestLastName]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrPropertyName">[ostrPropertyName]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrArrivalDate">[ostrArrivalDate]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrDeptDate">[ostrDeptDate]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrBookingRef">[ostrBookingRef]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrRoomRate">[ostrRoomRate]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="ostrRoomType">[ostrRoomType]</OutArgument>
+                  </ui:InvokeCode.Arguments>
+                </ui:InvokeCode>
+              </TryCatch.Try>
+              <TryCatch.Catches>
+                <Catch x:TypeArguments="ui:BusinessRuleException" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                  <ActivityAction x:TypeArguments="ui:BusinessRuleException">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Action if exception occurs" sap:VirtualizedContainerService.HintSize="416,225.6" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:LogMessage DisplayName="Logging if any exception occurs while fetching data" sap:VirtualizedContainerService.HintSize="382.4,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Error" Message="[New Exception().Message +&quot; exception occured while fetching data from pdf&quot;]" />
+                    </Sequence>
+                  </ActivityAction>
+                </Catch>
+              </TryCatch.Catches>
+              <TryCatch.Finally>
+                <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </Sequence>
+              </TryCatch.Finally>
+            </TryCatch>
+            <ui:LogMessage DisplayName="Log Message - Extracted Data" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Data extraction from invoice completed.&quot;+vbCrLf+&quot;Guest Name : &quot;+ostrGuestFirstName+&quot; &quot;+ostrGuestLastName+vbCrLf+&quot;Property Name: &quot;+ostrPropertyName+vbCrLf+&quot;Arrival Date : &quot;+ostrArrivalDate+vbCrLf+&quot;Departure Date : &quot;+ostrDeptDate+vbCrLf+&quot;Booking Reference : &quot;+ostrBookingRef+vbCrLf+&quot;Room Rate : &quot;+ostrRoomRate+vbCrLf+&quot;Room Type : &quot;+ostrRoomType]" />
+            <Assign DisplayName="Assign - Updating the Status of Data Extarction" sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_6">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Boolean">[oboolStatus]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="467.2,89.6" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Sequence>
+        </If.Else>
+      </If>
+    </Sequence>
+  </Sequence>
+</Activity>
