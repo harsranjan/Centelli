@@ -1,0 +1,398 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Data_Extraction" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="idictAssets" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="idictRateCodes" Type="InArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="ilstmailFinal" Type="InArgument(scg:List(snm:MailMessage))" />
+    <x:Property Name="idtLogFiles" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="idtBookingData" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="idictPriceTable" Type="InArgument(scg:Dictionary(x:String, x:String))" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Data_Extraction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>UiPath.PDF.Activities</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>System.Dynamic</x:String>
+      <x:String>System.Collections.Specialized</x:String>
+      <x:String>UiPath.Web.Activities</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>UiPath.Core.Activities.Orchestrator</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>netstandard</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.Collections.Specialized</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Data_Extraction" sap:VirtualizedContainerService.HintSize="892.0000000000001,3755.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="strPdfText" />
+      <Variable x:TypeArguments="x:String" Name="strStatus">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:String">Success</Literal>
+        </Variable.Default>
+      </Variable>
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="Sequence for Data Extraction" sap:VirtualizedContainerService.HintSize="713.6,3732" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" DisplayName="For Each Mail in List of fetched mails" sap:VirtualizedContainerService.HintSize="680,3648.8" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[ilstmailFinal]">
+        <ui:ForEach.Body>
+          <ActivityAction x:TypeArguments="snm:MailMessage">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="strCurrentMail" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Action to perform on each mail" sap:VirtualizedContainerService.HintSize="646.4,3511.2" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:SaveMailAttachments Attachments="{x:Null}" ResourceAttachments="{x:Null}" DisplayName="Save Mail PDF contains Booking Details" ExcludeInlineAttachments="False" FolderPath="[idictAssets(&quot;MCK002 - Folder Path For Saving Attachments&quot;).ToString]" sap:VirtualizedContainerService.HintSize="612.8,226.4" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_2" Message="[strCurrentMail]" OverwriteExisting="True" />
+              <ui:ForEachFileX DisplayName="Traversing all saved attachments" Filter="*.pdf" Folder="[idictAssets(&quot;MCK002 - Folder Path For Saving Attachments&quot;).ToString]" sap:VirtualizedContainerService.HintSize="612.8,3224.8" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
+                <ui:ForEachFileX.Body>
+                  <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
+                    <ActivityAction.Argument1>
+                      <DelegateInArgument x:TypeArguments="si:FileInfo" Name="CurrentAttachment" />
+                    </ActivityAction.Argument1>
+                    <ActivityAction.Argument2>
+                      <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
+                    </ActivityAction.Argument2>
+                    <Sequence DisplayName="Action to perform on each PDF" sap:VirtualizedContainerService.HintSize="579.2,2936.8" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:String" Name="strRegex" />
+                        <Variable x:TypeArguments="njl:JObject" Name="jobjRegex" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:LogMessage DisplayName="Data Extraction Started" sap:VirtualizedContainerService.HintSize="545.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Data Extraction Started For Mail Subject : &quot;+strCurrentMail.Subject]" />
+                      <ui:ReadPDFText DisplayName="Reading PDF Booking Text " FileName="[CurrentAttachment.FullName]" sap:VirtualizedContainerService.HintSize="545.6,115.2" sap2010:WorkflowViewState.IdRef="ReadPDFText_1" PreserveFormatting="True" Range="All" Text="[strPdfText]" />
+                      <ui:DeleteFileX DisplayName="Delete File After Data Extraction" sap:VirtualizedContainerService.HintSize="545.6,112.8" sap2010:WorkflowViewState.IdRef="DeleteFileX_1" Path="[CurrentAttachment.FullName]" />
+                      <ui:ReadTextFile File="{x:Null}" Content="[strRegex]" DisplayName="Read Regex JSON File" FileName="[idictAssets(&quot;MCK002 - Regex File Path&quot;).ToString]" sap:VirtualizedContainerService.HintSize="545.6,112.8" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+                      <ui:DeserializeJson x:TypeArguments="njl:JObject" JsonSample="{x:Null}" DisplayName="Deserialize JSON File" sap:VirtualizedContainerService.HintSize="545.6,122.4" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[jobjRegex]" JsonString="[strRegex]" />
+                      <TryCatch DisplayName="If any excpetion occur while data exctraction" sap:VirtualizedContainerService.HintSize="545.6,428" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <TryCatch.Try>
+                          <ui:InvokeCode ContinueOnError="{x:Null}" Code="For Each varName As JProperty In ijobjRegex.Item(&quot;BOOKING&quot;)&#xD;&#xA;&#x9;Dim varObject As JToken = varName.Value&#xD;&#xA;&#x9;For Each i As JProperty In varObject&#xD;&#xA;&#x9;&#x9;Dim varRegexList As JToken = i.Value&#xD;&#xA;&#x9;&#x9;For Each regex As JToken In varRegexList.Children()&#xD;&#xA;&#x9;&#x9;&#x9;Dim regexMatch As New System.Text.RegularExpressions.Regex(regex.ToString)&#xD;&#xA;&#x9;&#x9;&#x9;For Each M As System.Text.RegularExpressions.Match In regexMatch.Matches(istrPdfText)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;Dim strBookingRef As String = If(M.Groups(&quot;strBookingRef&quot;).Success,M.Groups(&quot;strBookingRef&quot;).Value.Trim,String.Empty)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;Dim strGuestName As String = If(M.Groups(&quot;strGuestName&quot;).Success,M.Groups(&quot;strGuestName&quot;).Value.Trim,String.Empty)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;Dim strGuestEmail As String = If(M.Groups(&quot;strGuestEmail&quot;).Success,M.Groups(&quot;strGuestEmail&quot;).Value.Trim,String.Empty)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;Dim strPropertyName As String = If(M.Groups(&quot;strPropertyName&quot;).Success,M.Groups(&quot;strPropertyName&quot;).Value.Trim,String.Empty)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;Dim strArrivalDate As String = If(M.Groups(&quot;strArrivalDate&quot;).Success,M.Groups(&quot;strArrivalDate&quot;).Value.Trim,String.Empty)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;Dim strDepartureDate As String = If(M.Groups(&quot;strDepartureDate&quot;).Success,M.Groups(&quot;strDepartureDate&quot;).Value.Trim,String.Empty)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;Dim strRoomType As String = If(M.Groups(&quot;strRoomType&quot;).Success,M.Groups(&quot;strRoomType&quot;).Value.Trim,String.Empty)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;Dim strNoOfAdults As String = If(M.Groups(&quot;strNoOfAdults&quot;).Success,M.Groups(&quot;strNoOfAdults&quot;).Value.Trim,String.Empty)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;Dim strRoomRate As String = If(M.Groups(&quot;strRoomRate&quot;).Success,M.Groups(&quot;strRoomRate&quot;).Value.Trim,String.Empty)&#xD;&#xA;&#x9;&#x9;&#x9;iodtBookingData.Rows.Add(strGuestEmail,strGuestName,strPropertyName,strArrivalDate,strDepartureDate,strBookingRef,strNoOfAdults,strRoomRate,strRoomType)&#xD;&#xA;&#x9;&#x9;&#x9;iodtLogFiles.Rows.Add(strGuestEmail,strGuestName,strPropertyName,strArrivalDate,strDepartureDate,strBookingRef,strNoOfAdults,strRoomRate,strRoomType)&#xD;&#xA;&#x9;&#x9;&#x9;Console.WriteLine(&quot;Extracted Data : &quot;+vbCrLf+strGuestName+vbCrLf+strGuestEmail+vbCrLf+strPropertyName+vbCrLf+strArrivalDate+vbCrLf+strDepartureDate+vbCrLf+strRoomType+vbCrLf+strNoOfAdults+vbCrLf+strRoomRate)&#xD;&#xA;&#x9;&#x9;&#x9;Next&#xD;&#xA;&#x9;&#x9;Next&#xD;&#xA;&#x9;Next&#xD;&#xA;Next&#xD;&#xA;" DisplayName="Invoke Code For Data Extraction By JSON" sap:VirtualizedContainerService.HintSize="333.6,164.8" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+                            <ui:InvokeCode.Arguments>
+                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="iodtBookingData">
+                                <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="idtBookingData" />
+                              </InOutArgument>
+                              <InArgument x:TypeArguments="njl:JObject" x:Key="ijobjRegex">
+                                <VisualBasicValue x:TypeArguments="njl:JObject" ExpressionText="jobjRegex" />
+                              </InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="istrPdfText">
+                                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="strPdfText" />
+                              </InArgument>
+                              <InOutArgument x:TypeArguments="sd:DataTable" x:Key="iodtLogFiles">
+                                <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="idtLogFiles" />
+                              </InOutArgument>
+                              <InArgument x:TypeArguments="snm:MailMessage" x:Key="istrCurrentMail">
+                                <VisualBasicValue x:TypeArguments="snm:MailMessage" ExpressionText="strCurrentMail" />
+                              </InArgument>
+                            </ui:InvokeCode.Arguments>
+                          </ui:InvokeCode>
+                        </TryCatch.Try>
+                        <TryCatch.Catches>
+                          <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="403.2,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ActivityAction x:TypeArguments="ui:BusinessRuleException">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
+                              </ActivityAction.Argument>
+                              <Sequence DisplayName="If any exception occurs" sap:VirtualizedContainerService.HintSize="467.2,221.6" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Rethrow DisplayName="Rethrow the exception" sap:VirtualizedContainerService.HintSize="433.6,56.8" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+                                <Assign DisplayName="Assign the status to Exception" sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_2">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[strStatus]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">[exception.Message]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </Sequence>
+                            </ActivityAction>
+                          </Catch>
+                        </TryCatch.Catches>
+                      </TryCatch>
+                      <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[idtBookingData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="545.6,491.2" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                        <ui:ForEachRow.Body>
+                          <ActivityAction x:TypeArguments="sd:DataRow">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="512,293.6" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                              <Sequence.Variables>
+                                <Variable x:TypeArguments="sd:DataTable" Name="idtBookingData" />
+                              </Sequence.Variables>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478.4,233.6" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                                <ui:MultipleAssign.AssignOperations>
+                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[CurrentRow("Booking Type")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[If(strCurrentMail.Subject.ToLower().Contains("confirmation"),"Confirmation","Cancellation")]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[CurrentRow("Mail Message ID")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[strCurrentMail.Headers("Message-ID")]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[CurrentRow("Rate Code")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[idictRateCodes(CurrentRow("Room Type").ToString)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[CurrentRow("Price")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">["$" + ((DateTime.Parse(CurrentRow("Departure Date").ToString()) - DateTime.Parse(CurrentRow("Arrival Date").ToString())).Days * CInt(idictPriceTable(CurrentRow("Rate Code").ToString().Substring(0, 1)).Replace("$", ""))).ToString()]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                  </scg:List>
+                                </ui:MultipleAssign.AssignOperations>
+                              </ui:MultipleAssign>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEachRow.Body>
+                      </ui:ForEachRow>
+                      <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[idtLogFiles]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="545.6,553.6" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+                        <ui:ForEachRow.Body>
+                          <ActivityAction x:TypeArguments="sd:DataRow">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="512,356" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                              <Sequence.Variables>
+                                <Variable x:TypeArguments="sd:DataTable" Name="idtBookingData" />
+                              </Sequence.Variables>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478.4,296" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                                <ui:MultipleAssign.AssignOperations>
+                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[CurrentRow("Booking Type")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[If(strCurrentMail.Subject.ToLower().Contains("confirmation"),"Confirmation","Cancellation")]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[CurrentRow("Mail Message ID")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[strCurrentMail.Headers("Message-ID")]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[CurrentRow("Rate Code")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[idictRateCodes(CurrentRow("Room Type").ToString)]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[CurrentRow("Price")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">["$" + ((DateTime.Parse(CurrentRow("Departure Date").ToString()) - DateTime.Parse(CurrentRow("Arrival Date").ToString())).Days * CInt(idictPriceTable(CurrentRow("Rate Code").ToString().Substring(0, 1)).Replace("$", ""))).ToString()]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[CurrentRow("Process Time")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[DateTime.Now.ToString]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
+                                      <ui:AssignOperation.To>
+                                        <OutArgument x:TypeArguments="x:Object">[CurrentRow("Status")]</OutArgument>
+                                      </ui:AssignOperation.To>
+                                      <ui:AssignOperation.Value>
+                                        <InArgument x:TypeArguments="x:Object">[strStatus]</InArgument>
+                                      </ui:AssignOperation.Value>
+                                    </ui:AssignOperation>
+                                  </scg:List>
+                                </ui:MultipleAssign.AssignOperations>
+                              </ui:MultipleAssign>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEachRow.Body>
+                      </ui:ForEachRow>
+                      <ui:BulkAddQueueItems TimeoutMS="{x:Null}" DisplayName="Add Booking Details To Queue" FolderPath="Shared/MCK002" sap:VirtualizedContainerService.HintSize="545.6,227.2" sap2010:WorkflowViewState.IdRef="BulkAddQueueItems_2" QueueItemsDataTable="[idtBookingData]" QueueName="MCK002 - Booking Details" />
+                      <ui:ClearDataTable DataTable="[idtBookingData]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="545.6,112.8" sap2010:WorkflowViewState.IdRef="ClearDataTable_2" />
+                      <ui:AppendRange WorkbookPathResource="{x:Null}" DataTable="[idtLogFiles]" DisplayName="Appending Log File" sap:VirtualizedContainerService.HintSize="545.6,148" sap2010:WorkflowViewState.IdRef="AppendRange_1" SheetName="[idictAssets(&quot;MCK002 - LogFile Excel Sheet Name&quot;).ToString]" WorkbookPath="[idictAssets(&quot;MCK002 - LogFile Excel Path&quot;).ToString]" />
+                      <ui:ClearDataTable DataTable="[idtLogFiles]" DisplayName="Clear LogFile DT to stop Data Redundancy" sap:VirtualizedContainerService.HintSize="545.6,112.8" sap2010:WorkflowViewState.IdRef="ClearDataTable_1" />
+                      <ui:LogMessage DisplayName="Data Extraction Completed" sap:VirtualizedContainerService.HintSize="545.6,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Data Extraction Completed For :&quot;+strCurrentMail.Subject]" />
+                    </Sequence>
+                  </ActivityAction>
+                </ui:ForEachFileX.Body>
+              </ui:ForEachFileX>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEach.Body>
+      </ui:ForEach>
+    </Sequence>
+  </Sequence>
+</Activity>

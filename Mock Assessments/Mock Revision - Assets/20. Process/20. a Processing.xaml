@@ -1,0 +1,341 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Read_Emails" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:snm="clr-namespace:System.Net.Mail;assembly=System.Net.Mail" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:umab="clr-namespace:UiPath.Mail.Activities.Business;assembly=UiPath.Mail.Activities" xmlns:umabh="clr-namespace:UiPath.Mail.Activities.Business.HtmlEditor;assembly=UiPath.Mail.Activities" xmlns:umae="clr-namespace:UiPath.Mail.Activities.Enums;assembly=UiPath.Mail.Activities" xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.Mail.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="idictAssets" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="iodtLogFiles" Type="InOutArgument(sd:DataTable)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Read_Emails_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.Mail.Activities.Business</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Activities.Business.ForEachMail</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Mail.Activities.Enums</x:String>
+      <x:String>UiPath.Shared.Activities.Utils</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Mail.Activities.Business.HtmlEditor</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Core.Activities.Orchestrator</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.PDF.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.MetadataLoadContext</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Read_Emails" sap:VirtualizedContainerService.HintSize="764.0000000000001,4539.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:Int32" Default="0" Name="intPassedCount" />
+      <Variable x:TypeArguments="x:Int32" Default="0" Name="intFailedCount" />
+      <Variable x:TypeArguments="x:String" Name="htmlContent" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtFilterDataTable" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="Processing of Invoices" sap:VirtualizedContainerService.HintSize="524.8,3122.4" sap2010:WorkflowViewState.IdRef="Sequence_17">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="lstmailMessages" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:RetryScope DisplayName="Retry Outlook if any Error Occurs" sap:VirtualizedContainerService.HintSize="491.2,381.6" sap2010:WorkflowViewState.IdRef="RetryScope_2">
+        <ui:RetryScope.ActivityBody>
+          <ActivityAction>
+            <Sequence DisplayName="Fetching Outlook mails" sap:VirtualizedContainerService.HintSize="449.6,173.6" sap2010:WorkflowViewState.IdRef="Sequence_28">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:GetOutlookMailMessages Account="{x:Null}" Filter="{x:Null}" FilterByMessageIds="{x:Null}" TimeoutMS="{x:Null}" ConnectionMode="LegacyConfiguration" DisplayName="Fetching Outlook Messages" GetAttachements="False" sap:VirtualizedContainerService.HintSize="416,113.6" sap2010:WorkflowViewState.IdRef="GetOutlookMailMessages_1" MailFolder="[CStr(idictAssets(&quot;MT001 - Mail Folder Name&quot;))]" MarkAsRead="False" Messages="[lstmailMessages]" OnlyUnreadMessages="False" OrderByDate="NewestFirst" Top="[CInt(idictAssets(&quot;MT001 - No of Emails&quot;))]" UseISConnection="False">
+                <ui:GetOutlookMailMessages.ConnectionDetailsBackupSlot>
+                  <usau:BackupSlot x:TypeArguments="umae:ConnectionDetails" StoredValue="{x:Null}">
+                    <usau:BackupSlot.BackupValues>
+                      <scg:Dictionary x:TypeArguments="umae:ConnectionDetails, scg:List(x:Object)" />
+                    </usau:BackupSlot.BackupValues>
+                  </usau:BackupSlot>
+                </ui:GetOutlookMailMessages.ConnectionDetailsBackupSlot>
+              </ui:GetOutlookMailMessages>
+            </Sequence>
+          </ActivityAction>
+        </ui:RetryScope.ActivityBody>
+        <ui:RetryScope.Condition>
+          <ActivityFunc x:TypeArguments="x:Boolean" />
+        </ui:RetryScope.Condition>
+      </ui:RetryScope>
+      <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="{x:Null}" DisplayName="For Each currentMail" sap:VirtualizedContainerService.HintSize="491.2,2648.8" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[lstmailMessages]">
+        <ui:ForEach.Body>
+          <ActivityAction x:TypeArguments="snm:MailMessage">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="currentMail" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="486.4,2527.2" sap2010:WorkflowViewState.IdRef="Sequence_14">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If Condition="[CurrentMail.Subject.Contains(&quot;Invoice&quot;) OR CurrentMail.Subject.Contains(&quot;Receipt&quot;)]" DisplayName="If - Subject contains Invoice Or Receipt" sap:VirtualizedContainerService.HintSize="452.8,1939.2" sap2010:WorkflowViewState.IdRef="If_4">
+                <If.Then>
+                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="451.2,1711.2" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="strInvoiceID" />
+                      <Variable x:TypeArguments="x:String" Name="strInvoiceDate" />
+                      <Variable x:TypeArguments="x:String" Name="strInvoiceAmount" />
+                      <Variable x:TypeArguments="x:Boolean" Default="False" Name="boolExcelExists" />
+                      <Variable x:TypeArguments="x:Int32" Name="intUniqueID" />
+                      <Variable x:TypeArguments="x:Boolean" Name="boolStatusofProcess" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:SaveMailAttachments Attachments="{x:Null}" ResourceAttachments="{x:Null}" DisplayName="Save Email Attachments - Temp Invoices" ExcludeInlineAttachments="False" FolderPath="[CStr(idictAssets(&quot;MT001 - Temp Path to Store Invoices for  Processing&quot;)) +&quot;\&quot;+ currentMail.From.DisplayName]" sap:VirtualizedContainerService.HintSize="417.6,226.4" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_1" Message="[currentMail]" OverwriteExisting="True" />
+                    <ui:SaveMailAttachments Attachments="{x:Null}" ResourceAttachments="{x:Null}" DisplayName="Save Email Attachments - Permanent Invoices" ExcludeInlineAttachments="False" FolderPath="[CStr(idictAssets(&quot;MT001 - Folder Path For storing Invoices&quot;)) + &quot;\&quot;+currentMail.From.DisplayName]" sap:VirtualizedContainerService.HintSize="417.6,226.4" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_2" Message="[currentMail]" OverwriteExisting="True" />
+                    <ui:LogMessage DisplayName="Log Message - Invoices saved for this email" sap:VirtualizedContainerService.HintSize="417.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Trace" Message="[&quot;Invoices From &quot;+CurrentMail.From.DisplayName+&quot; saved successfully..&quot;]" />
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="20. b Extract PDF Invoice Details - Invoke Workflow File (20. Process\20. b Extract PDF Invoice Details.xaml)" sap:VirtualizedContainerService.HintSize="417.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="20. Process\20. b Extract PDF Invoice Details.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="istrFilePathDetails" xml:space="preserve">[CStr(idictAssets("MT001 - Temp Path to Store Invoices for  Processing")) +"\"+ currentMail.From.DisplayName]</InArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="ostrInvoiceId">[strInvoiceID]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="ostrInvoiceDate">[strInvoiceDate]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="ostrInvoiceAmount">[strInvoiceAmount]</OutArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Send Email To Sender - Invoke Workflow File (Send Email To Sender.xaml)" sap:VirtualizedContainerService.HintSize="417.6,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="20. Process\20. c Send Email To Sender.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="istrSenderEmail">[CurrentMail.From.Address]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="istrInvoiceID">[strInvoiceID]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="istrInvoiceAmount">[strInvoiceAmount]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="istrInvoiceDate">[strInvoiceAmount]</InArgument>
+                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="idictAssets">[idictAssets]</InArgument>
+                        <InOutArgument x:TypeArguments="x:Int32" x:Key="iointPassedCount">[intPassedCount]</InOutArgument>
+                        <InOutArgument x:TypeArguments="x:Int32" x:Key="iointFailedCount">[intFailedCount]</InOutArgument>
+                        <OutArgument x:TypeArguments="x:Boolean" x:Key="oboolStatusOfProcess">[boolStatusofProcess]</OutArgument>
+                        <OutArgument x:TypeArguments="x:Int32" x:Key="ointUniqueID">[intUniqueID]</OutArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <If Condition="[boolStatusofProcess = True]" DisplayName="Updating DT if Status of the process is completed" sap:VirtualizedContainerService.HintSize="417.6,672" sap2010:WorkflowViewState.IdRef="If_7">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If.Then>
+                        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,271.2" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{currentMail.From.DisplayName,currentMail.From.Address,strInvoiceID,strInvoiceDate,strInvoiceAmount,DateTime.Now.ToString,&quot;Success&quot;,intUniqueID.ToString}]" DataTable="[iodtLogFiles]" DisplayName="Add Data Row - Updaing Log DataTable" sap:VirtualizedContainerService.HintSize="382.4,211.2" sap2010:WorkflowViewState.IdRef="AddDataRow_6" />
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,271.2" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{currentMail.From.DisplayName,currentMail.From.Address,strInvoiceID,strInvoiceDate,strInvoiceAmount,DateTime.Now.ToString,&quot;Failed&quot;,intUniqueID.ToString}]" DataTable="[iodtLogFiles]" DisplayName="Add Data Row - Updaing Log DataTable" sap:VirtualizedContainerService.HintSize="382.4,211.2" sap2010:WorkflowViewState.IdRef="AddDataRow_7" />
+                        </Sequence>
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="451.2,89.6" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </Sequence>
+                </If.Else>
+              </If>
+              <If Condition="[System.IO.File.Exists(CStr(idictAssets(&quot;MT001 - Processed Log File Path&quot;))) = False]" sap:VirtualizedContainerService.HintSize="452.8,528" sap2010:WorkflowViewState.IdRef="If_10">
+                <If.Then>
+                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,199.2" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[iodtLogFiles]" DisplayName="Updating Excel With Updated Data" sap:VirtualizedContainerService.HintSize="382.4,139.2" sap2010:WorkflowViewState.IdRef="WriteRange_4" SheetName="[CStr(idictAssets(&quot;MT001 - Excel Sheet Name&quot;))]" WorkbookPath="[CStr(idictAssets(&quot;MT001 - Processed Log File Path&quot;))]" />
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,199.2" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:AppendRange WorkbookPathResource="{x:Null}" DataTable="[iodtLogFiles]" DisplayName="Adding Data Further if Excel Already exists" sap:VirtualizedContainerService.HintSize="382.4,139.2" sap2010:WorkflowViewState.IdRef="AppendRange_2" SheetName="[CStr(idictAssets(&quot;MT001 - Excel Sheet Name&quot;))]" WorkbookPath="[CStr(idictAssets(&quot;MT001 - Processed Log File Path&quot;))]" />
+                  </Sequence>
+                </If.Else>
+              </If>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEach.Body>
+      </ui:ForEach>
+    </Sequence>
+    <ui:SetAsset TimeoutMS="{x:Null}" AssetName="MT001- Unique ID" DisplayName="Updating Value of Unique ID" FolderPath="Shared/Mock Test" sap:VirtualizedContainerService.HintSize="524.8,227.2" sap2010:WorkflowViewState.IdRef="SetAsset_2" Value="[CInt(idictAssets(&quot;MT001- Unique ID&quot;))+1]" />
+    <ui:ReadRange Range="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="False" DataTable="[iodtLogFiles]" DisplayName="Reading Invoices Excel" sap:VirtualizedContainerService.HintSize="524.8,120" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="[CStr(idictAssets(&quot;MT001 - Excel Sheet Name&quot;))]" WorkbookPath="[CStr(idictAssets(&quot;MT001 - Processed Log File Path&quot;))]" />
+    <ui:LogMessage DisplayName="Log Message - Invoices Retrived" sap:VirtualizedContainerService.HintSize="524.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;All Invoices Retrived Successfully...&quot;]" />
+    <ui:FilterDataTable DataTable="[iodtLogFiles]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="524.8,194.4" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[dtFilterDataTable]" SelectColumnsMode="Remove">
+      <ui:FilterDataTable.Filters>
+        <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
+          <ui:FilterOperationArgument Column="{x:Null}" Operand="{x:Null}" BooleanOperator="And" Operator="LT" />
+        </scg:List>
+      </ui:FilterDataTable.Filters>
+      <ui:FilterDataTable.SelectColumns>
+        <scg:List x:TypeArguments="InArgument" Capacity="4">
+          <InArgument x:TypeArguments="x:String">["Column0"]</InArgument>
+          <InArgument x:TypeArguments="x:String">["Column5"]</InArgument>
+          <InArgument x:TypeArguments="x:String">["Column6"]</InArgument>
+          <InArgument x:TypeArguments="x:String">["Column7"]</InArgument>
+        </scg:List>
+      </ui:FilterDataTable.SelectColumns>
+    </ui:FilterDataTable>
+    <umab:CreateHtmlContent DisplayName="Create HTML Content" sap:VirtualizedContainerService.HintSize="524.8,185.6" HtmlContent="[htmlContent]" sap2010:WorkflowViewState.IdRef="CreateHtmlContent_1">
+      <umab:CreateHtmlContent.HtmlContentArg>
+        <umabh:HtmlContentArgument HtmlBody="{x:Null}" FilePath=".data/HtmlContent3.html">
+          <umabh:HtmlContentArgument.RuntimeImages>
+            <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+          </umabh:HtmlContentArgument.RuntimeImages>
+          <umabh:HtmlContentArgument.ValueMappings>
+            <scg:List x:TypeArguments="umabh:HtmlValueMappingBase" Capacity="4">
+              <umabh:HtmlTextValueMapping Name="intPassed" Value="[intPassedCount]" />
+              <umabh:HtmlTextValueMapping Name="intFailed" Value="[intFailedCount]" />
+              <umabh:HtmlTableValueMapping Name="dtInvoices" Value="[dtFilterDataTable]" />
+            </scg:List>
+          </umabh:HtmlContentArgument.ValueMappings>
+        </umabh:HtmlContentArgument>
+      </umab:CreateHtmlContent.HtmlContentArg>
+    </umab:CreateHtmlContent>
+    <ui:SendOutlookMail Bcc="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Account="[idictAssets(&quot;MT001 - Email To Get Mails&quot;).ToString]" Body="[htmlContent]" ConnectionMode="LegacyConfiguration" DisplayName="Sending Final Status Message" sap:VirtualizedContainerService.HintSize="524.8,326.4" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" Importance="Normal" IsBodyHtml="True" IsDraft="False" Sensitivity="Normal" Subject="[CStr(idictAssets(&quot;MT001 - Final Status Mail Subject&quot;))]" To="[CStr(idictAssets(&quot;MT001 - Admin Email Address&quot;))]" UseISConnection="False">
+      <ui:SendOutlookMail.ConnectionDetailsBackupSlot>
+        <usau:BackupSlot x:TypeArguments="umae:ConnectionDetails" StoredValue="{x:Null}">
+          <usau:BackupSlot.BackupValues>
+            <scg:Dictionary x:TypeArguments="umae:ConnectionDetails, scg:List(x:Object)" />
+          </usau:BackupSlot.BackupValues>
+        </usau:BackupSlot>
+      </ui:SendOutlookMail.ConnectionDetailsBackupSlot>
+      <ui:SendOutlookMail.Files>
+        <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+      </ui:SendOutlookMail.Files>
+    </ui:SendOutlookMail>
+    <ui:LogMessage DisplayName="Final Mail Status Message" sap:VirtualizedContainerService.HintSize="524.8,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Final status message sent successfully.&quot;]" />
+  </Sequence>
+</Activity>
